@@ -1,0 +1,68 @@
+baseURL = 'https://4oh4.github.io/'
+locale = 'en-us'
+title = '4oh4'
+theme = 'PaperMod'
+
+enableRobotsTXT = true
+enableEmoji = true
+pygmentsUseClasses = true
+
+paginate = 10
+
+[minify]
+  disableXML = true
+
+[taxonomies]
+  tag = 'tags'
+  category = 'categories'
+
+[params]
+  env = 'production'
+  title = '4oh4'
+  description = "Notes from exploring AI models and techniques — what I tried, what broke, and what I learned."
+  author = 'Rupert'
+  defaultTheme = 'auto'
+  ShowReadingTime = true
+  ShowWordCount = true
+  ShowShareButtons = false
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  ShowRssButtonInSectionTermList = true
+  ShowToc = true
+  TocOpen = false
+  UseHugoToc = true
+  comments = false
+  hidemeta = false
+
+  [params.homeInfoParams]
+    Title = "Hi, I'm Rupert 👋"
+    Content = "I work in AI engineering, and I use this space to explore new models and techniques outside of work, then write up what I find. Expect hands-on notes, benchmarks, and the occasional dead end."
+
+  [[params.socialIcons]]
+    name = 'github'
+    url = 'https://github.com/4oh4'
+
+[[menu.main]]
+  identifier = 'posts'
+  name = 'Posts'
+  url = '/posts/'
+  weight = 10
+
+[[menu.main]]
+  identifier = 'tags'
+  name = 'Tags'
+  url = '/tags/'
+  weight = 20
+
+[[menu.main]]
+  identifier = 'archives'
+  name = 'Archive'
+  url = '/archives/'
+  weight = 30
+
+[markup]
+  [markup.highlight]
+    noClasses = false
+  [markup.goldmark.renderer]
+    unsafe = true
