@@ -1,5 +1,5 @@
 baseURL = 'https://4oh4.github.io/'
-locale = 'en-us'
+locale = 'en-gb'
 title = '4oh4'
 theme = 'PaperMod'
 
@@ -22,8 +22,8 @@ pygmentsUseClasses = true
 
 [params]
   env = 'production'
-  title = '4oh4'
-  description = "Notes from exploring AI models and techniques — what I tried, what broke, and what I learned."
+  title = '4oh4/dev'
+  description = "Dev notes from experiments in AI."
   author = 'Rupert'
   defaultTheme = 'auto'
   ShowReadingTime = true
@@ -39,14 +39,6 @@ pygmentsUseClasses = true
   comments = false
   hidemeta = false
   mainSections = ['posts']
-
-  [params.homeInfoParams]
-    Title = "Hi, I'm Rupert 👋"
-    Content = "I work in AI engineering, and I use this space to explore new models and techniques outside of work, then write up what I find. Expect hands-on notes, benchmarks, and the occasional dead end."
-
-  [[params.socialIcons]]
-    name = 'github'
-    url = 'https://github.com/4oh4'
 
 [[menu.main]]
   identifier = 'posts'
@@ -71,12 +63,6 @@ pygmentsUseClasses = true
   name = 'Search'
   url = '/search/'
   weight = 40
-
-[[menu.main]]
-  identifier = 'about'
-  name = 'About'
-  url = '/about/'
-  weight = 50
 
 [markup]
   [markup.highlight]

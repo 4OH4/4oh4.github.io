@@ -30,7 +30,7 @@ hugo list drafts                         # what's still unpublished
 ```
 hugo.toml                       site config (menu, params, search output, markup)
 content/posts/<date>-<slug>/    one page bundle per post: index.md + images/data beside it
-content/{about,archives,search}.md   fixed pages — don't delete; archives/search use theme layouts
+content/{archives,search}.md         fixed pages — don't delete; archives/search use theme layouts
 archetypes/posts/index.md       post scaffold (YAML front matter)
 layouts/partials/extend_head.html    loads KaTeX only on posts with `math: true`
 .claude/skills/                 new-post, publish-post workflows
