@@ -59,11 +59,65 @@ Don't edit `themes/PaperMod` (submodule). Override via files in `layouts/` or `a
 
 ## Voice and structure
 
-First person, plain, honest lab-notebook tone. Not marketing, not tutorial-polished. Include what failed and what surprised. State the setup precisely enough to reproduce (model + version/revision, hardware, library versions, seeds, dataset) and be upfront about limits (single run, small sample, no significance testing). Don't overclaim.
+Plain, honest lab-notebook tone. Not marketing, not tutorial-polished. Include what failed and what surprised. State the setup precisely enough to reproduce (model + version/revision, hardware, library versions, seeds, dataset) and be upfront about limits (single run, small sample, no significance testing). Don't overclaim.
 
 Default shape (drop sections that don't apply): **TL;DR** → **Motivation** (why try this) → **Setup** → **Results** (tables/plots, actual numbers) → **What broke / surprises** → **Takeaways** → **Reproduce** (repo link, commit, commands). Typical length 600–1500 words.
 
 Tag vocabulary so far: `meta`. Add new tags sparingly and reuse (e.g. `llm`, `inference`, `fine-tuning`, `evals`, `agents`, `rag`, `embeddings`, `vision`, `benchmarks`, `tooling`).
+
+### Purpose and reader
+The reader is a technically competent peer: an engineer or technical lead who knows the fundamentals and wants to know what I did, what I found, and how far to trust it. Do not explain basic concepts. Do explain anything specific to the experiment that a competent reader could not infer.
+
+### Voice
+- First person, singular ("I ran", "I expected"). Plain, measured and slightly dry. Opinions are allowed but must be earned by the evidence in the post.
+- Write as one engineer talking to another, not as a vendor, journalist or influencer.
+- Confidence matches evidence. Say "this suggests" when the result suggests, "this shows" only when it does. Where a result is small-sample, single-run or unreplicated, say so at the point it is reported, not in a disclaimer at the end.
+- Understatement over enthusiasm. If something worked well, give the number and let it stand.
+
+### Language
+- British English throughout: spelling (behaviour, optimise, calibre, analyse, labelled, modelling), punctuation (single quotation marks for quotes, with punctuation placed outside unless part of the quoted text) and vocabulary. Dates as 2 October 2026.
+- No corporate jargon or hype. Avoid: leverage, unlock, game-changer, revolutionary, cutting-edge, state-of-the-art (unless citing a specific benchmark claim), paradigm shift, supercharge, seamless, robust (unless used in its statistical sense), deep dive, journey, landscape, ecosystem, "in today's fast-moving world".
+- Use technical terms where they are the precise term (calibration, ECE, context window, zero-shot), and define an experiment-specific term once, briefly, on first use. Spell out an acronym once if the reader might not know it.
+- Prefer concrete nouns and verbs. Prefer "costs 4x less" to "dramatically more cost-effective".
+
+### Length and density
+- Middle ground. More than the minimum technically required: give enough context that a reader arriving cold understands why the experiment was run, what was compared and under what conditions. Stop short of narrating every step or restating the obvious.
+- Typical paragraph: three to five sentences. One idea per paragraph. If a sentence only restates the previous one, delete it.
+- Include the detail that would let someone reproduce or sanity-check the work: exact model identifiers and versions, dataset and split, sample size, seeds, metric definitions, dates run. Put these inline or in a short 'Method' section, not scattered.
+- Skip sections that do not earn their place. Not every post needs a conclusion that re-summarises it.
+
+### Structure
+- Open with the question or motivation in one or two paragraphs, not a thesis statement or a hook. Say what I wanted to find out and why it seemed worth testing.
+- Then: method (what was done, and what was deliberately not done), results, interpretation, limitations, and a short closing thought.
+- Use headings sparingly (a short post may need only three or four). Plain, descriptive headings, not clever ones.
+- Use a table or figure when it conveys results more clearly than prose, and say in the text what the reader should notice in it. Do not use bullet lists as a substitute for reasoning; use them for genuinely parallel items (configurations, caveats, steps).
+- Use bold rarely, mainly for a key term at first definition. No emoji. No decorative formatting.
+
+### Content principles
+1. **Report what happened, including the awkward parts.** Null, mixed or surprising results are as publishable as clean ones. Do not tidy the narrative.
+2. **State the limitations plainly and specifically.** For example: the sample was 300 rows per dataset, so confidence intervals are wide; it was a single run, not repeated; the comparison arms differ in size or architecture. Do not imply more rigour than was applied (for instance, do not suggest independent replication if responses were cached or run once).
+3. **Be fair to the thing being tested and to the baseline.** Describe what the setup might have favoured. If a comparison is not like for like, say how.
+4. **Separate observation from explanation.** Say what was measured; then, separately, offer a mechanism and flag it as a hypothesis unless tested. Be precise about the distinction between architecture, training method and the mechanism causing an effect.
+5. **Hold two things at once.** Where the honest picture is nuanced (it is cheaper and faster, but untested on messy real-world data), say both rather than collapsing to a clean story.
+6. **Say what it means in practice, modestly.** One or two sentences on what an engineer building a real system might take from this, and where the result would not transfer. Avoid grand claims about the future of the field.
+7. **Disclose context.** If I had early access, or a relationship with a vendor, or the model was days old at the time of testing, say so.
+8. **No unsupported claims about third parties.** Attribute vendor claims to the vendor ('the vendor reports...') and distinguish them from what I measured.
+
+### Things that make writing sound machine-generated: avoid
+- Opening with a sweeping statement about AI or the pace of change.
+- The 'It's not X, it's Y' construction and its variants; rhetorical questions followed immediately by their answers.
+- Lists of exactly three adjectives or examples used for rhythm.
+- Heavy use of em dashes. Use commas, brackets or full stops instead; at most one or two in a whole post.
+- Sentences that announce what is about to be said ('Here's the thing', 'Let's dive in', 'It's worth noting that', 'Importantly,').
+- Signposted wrap-ups ('In conclusion', 'Ultimately', 'The takeaway?') and neat aphoristic closing lines.
+- Uniform sentence length and parallel structure repeated paragraph after paragraph. Vary length naturally; allow the occasional short sentence or mild aside.
+- Over-hedging every sentence, and the opposite: false certainty. Hedge only where there is a real reason.
+- Inflated verbs and adjectives (crucial, pivotal, vital, remarkable, fascinating, intriguing).
+
+### Process
+- If any key fact, number, model name, date or result is missing, ask me for it. Never invent figures, quotations, citations or experimental details. Mark gaps as [TO CONFIRM] in the draft.
+- If my request is ambiguous, ask one clarifying question before drafting rather than guessing.
+- Give me the draft first, then a brief list of any claims you were unsure of or any places where the evidence seems thinner than the prose implies.
 
 ## Workflow
 

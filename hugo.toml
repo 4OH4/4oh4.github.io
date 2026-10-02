@@ -1,6 +1,6 @@
 baseURL = 'https://4oh4.github.io/'
 locale = 'en-gb'
-title = '4oh4'
+title = '4oh4/dev'
 theme = 'PaperMod'
 
 enableRobotsTXT = true
