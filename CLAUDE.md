@@ -49,8 +49,7 @@ Don't edit `themes/PaperMod` (submodule). Override via files in `layouts/` or `a
   date: 2026-09-20
   draft: true
   tags: ["llm", "inference"]            # 1–4, lowercase, reuse existing tags (grep content/posts)
-  summary: "One or two sentences shown in listings."
-  description: "Two or three sentences under the title: what was tested and why. Also used for RSS and link previews."
+  summary: "Two or three sentences: what was tested and what was found. Shown under the title, in listings, RSS and link previews."
   math: true                            # only if the post has LaTeX
   ```
 - Optional: `cover: {image: cover.png, alt: "..."}`, `ShowToc: false` for short posts.

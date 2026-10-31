@@ -3,8 +3,7 @@ title: "Testing Jev against three small LLMs on text classification and calibrat
 date: 2026-10-31
 draft: false
 tags: ["llm", "evals", "benchmarks"]
-summary: "I compared Jev, a non-generative classification model from TypeSafe AI, with Claude Haiku 4.5, GPT-5.4 mini and Gemini 3.8 Flash on Banking77, AG News and IMDb. It matched or beat Haiku and GPT-5.4 mini on accuracy at a fraction of the cost and trailed Gemini on two of the three datasets, but its confidence was no better calibrated than the LLMs' verbalised confidence."
-description: "Jev is a non-generative language model that TypeSafe AI describes as calibrated. I compared it with Claude Haiku 4.5, GPT-5.4 mini and Gemini 3.8 Flash on three public text classification datasets. I wanted to see how a classification-only model holds up against the cheap end of general-purpose LLMs, and whether its confidence is reliable enough to act on."
+summary: "I compared Jev, which TypeSafe AI describes as calibrated, with three small LLMs. It was cheaper and competitive on accuracy, but no better calibrated."
 ---
 
 **TL;DR.** Across 1,000 samples from each of three public text classification datasets, Jev matched or beat Claude Haiku 4.5 and GPT-5.4 mini on balanced accuracy, and trailed Gemini 3.8 Flash by 2 to 4 points on AG News and zero-shot Banking77. At list price, it costs between ~2 and ~15 times less per row than the cheapest LLM. Despite being trained using Reinforcement Learning for Calibrated Decisions, its confidence values were not better calibrated than the LLMs' self-reported confidence: Jev's expected calibration error (ECE) ranked third of four on every dataset. Accuracy did rise with Jev's confidence, so a confidence threshold was still useful. A TF-IDF + linear SVM trained on the full training splits had the highest balanced accuracy on Banking77 and AG News, but was about 6 points behind every API model on IMDb.

@@ -26,7 +26,7 @@ hugo new content posts/$(date +%F)-<slug>
 
 ## 3. Write
 
-- Fill front matter: specific `title`, 1–4 reused `tags` (check existing posts with grep), a 1–2 sentence `summary`, a 2–3 sentence `description` (subtitle: what was tested and why, not the findings), `math: true` only if LaTeX is used. Leave `draft: true`.
+- Fill front matter: specific `title`, 1–4 reused `tags` (check existing posts with grep), a 2–3 sentence `summary` (subtitle and listing text: what was tested and what was found; no separate `description`), `math: true` only if LaTeX is used. Leave `draft: true`.
 - Follow the structure and voice in CLAUDE.md. Lead with a TL;DR containing the actual finding. Report numbers exactly as in the source outputs; say how many runs, and don't claim significance you didn't measure.
 - Copy only the needed figures into the post folder (< 1 MB each, descriptive filenames, alt text). Generate tables in Markdown from the real result files. If a chart would help and none exists, propose one rather than fabricating data.
 - Include a Reproduce section: repo link pinned to the commit, key commands, environment.

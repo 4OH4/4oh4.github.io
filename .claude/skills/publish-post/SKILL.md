@@ -9,7 +9,7 @@ Publish an existing draft post. Pushing to `main` deploys the public site, so th
 
 1. **Locate the post**: `content/posts/*<argument>*/index.md` (if ambiguous or no argument, run `hugo list drafts` and ask).
 2. **Pre-flight review** — read the post fully and check:
-   - front matter complete: title, date, tags (1–4, reused), summary, description, `math` only if needed
+   - front matter complete: title, date, tags (1–4, reused), summary, `math` only if needed
    - no leftover `TODO` comments or placeholder text
    - no employer-derived or confidential content (CLAUDE.md rule 1); no secrets/tokens/absolute local paths in code output or logs
    - all images exist, have alt text, are < 1 MB; no weights/datasets/huge logs in the folder

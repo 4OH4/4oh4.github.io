@@ -16,9 +16,9 @@
       </span>
       {{- end }}
     </h1>
-    {{- if .Description }}
+    {{- with or .Description (.Summary | plainify | htmlUnescape) }}
     <div class="post-description">
-      {{ .Description }}
+      {{ . }}
     </div>
     {{- end }}
     {{- if not (.Param "hideMeta") }}
