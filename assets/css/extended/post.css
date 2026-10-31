@@ -18,6 +18,25 @@
     font-size: 20px;
 }
 
+.md-content table {
+    font-size: 15.75px;
+}
+
+/* Same page background as the home page, whose .list class posts don't get. Inside the
+   article, elements that use --code-bg turn white in light mode so they stay visible. */
+
+body:has(.post-single) {
+    background: var(--code-bg);
+}
+
+[data-theme="dark"] body:has(.post-single) {
+    background: var(--theme);
+}
+
+:root:not([data-theme="dark"]) .post-single {
+    --code-bg: var(--entry);
+}
+
 /* Post header */
 
 /* The outset carries the bottom border to the window edges without adding scrollable width */
@@ -79,16 +98,44 @@
     }
 }
 
-/* Left-hand contents. The tree and article form one block, centred while there is room.
-   As the page narrows the block's left edge holds at 96px while the right margin shrinks
-   to 24px, then the left edge tightens to 28px. The 100% resolves against the page width
-   wherever --tree-left is used, and 1120px allows for a classic scrollbar. */
+/* Page layout on posts with a contents tree. The page fills the window: the tree stays
+   tied to the left edge and the article starts a third of the way across, so both widths
+   follow the window. Text is capped at --text-width and gives way once the right padding
+   is reached. At 900px and below it is a single left-aligned column. */
 
 :root {
-    --tree-width: 280px;
-    --tree-gutter: 48px;
-    --tree-block: calc(var(--tree-width) + var(--tree-gutter) + var(--main-width));
-    --tree-left: max(28px, min(96px, 100% - var(--tree-block) - 24px), (100% - var(--tree-block)) / 2);
+    --page-pad: 36px;
+    --tree-gutter: 32px;
+    --text-width: 660px;
+    --header-width: 720px;
+}
+
+@media (max-width: 640px) {
+    :root {
+        --page-pad: 27px;
+    }
+}
+
+body:has(.post-tree) .header-nav {
+    max-width: none;
+    padding-inline: var(--page-pad);
+}
+
+.main:has(.post-tree) {
+    max-width: none;
+    margin-inline: 0;
+    padding-inline: var(--page-pad);
+}
+
+.post-single:has(.post-tree) .post-header {
+    max-width: var(--header-width);
+    margin-inline: 0;
+}
+
+.post-single:has(.post-tree) .post-content,
+.post-single:has(.post-tree) .post-footer,
+.post-single:has(.post-tree) details.toc {
+    max-width: var(--text-width);
 }
 
 .post-body .post-content {
@@ -97,41 +144,34 @@
 
 .post-tree {
     display: none;
-    font-size: 14px;
-    line-height: 1.4;
+    font-size: 15px;
+    line-height: 1.45;
 }
 
-@media screen and (min-width: 1120px) {
-    /* The grid reaches left out of .main, so the tree sits beside the article and sticks
-       only while the article is on screen */
+@media screen and (min-width: 901px) {
     .post-body:has(.post-tree) {
         display: grid;
-        grid-template-columns: var(--tree-width) minmax(0, 1fr);
+        grid-template-columns: calc(100% / 3 - var(--tree-gutter)) minmax(0, 1fr);
         column-gap: var(--tree-gutter);
-        margin-inline-start: calc(-1 * (var(--tree-width) + var(--tree-gutter)));
     }
 
+    .post-single:has(.post-tree) .post-header,
+    .post-single:has(.post-tree) .post-footer {
+        margin-left: calc(100% / 3);
+    }
+
+    /* Sticks only while the article is on screen */
     .post-tree {
         display: block;
         position: sticky;
-        top: 32px;
+        top: 36px;
         align-self: start;
-        max-height: calc(100vh - 64px);
+        max-height: calc(100vh - 72px);
         overflow-y: auto;
     }
 
     details.toc {
         display: none;
-    }
-
-    .main:has(.post-tree) {
-        margin-left: calc(var(--tree-left) + var(--tree-width) + var(--tree-gutter) - var(--gap));
-    }
-
-    /* Logo lines up with the tree, menu with the article's right edge */
-    body:has(.post-tree) .header-nav {
-        max-width: calc(var(--tree-block) + var(--gap) * 2);
-        margin-left: calc(var(--tree-left) - var(--gap));
     }
 }
 
@@ -139,12 +179,15 @@
     display: block;
     margin-bottom: 16px;
     color: var(--primary);
+    font-size: 18px;
     font-weight: 500;
+    line-height: 1.35;
 }
 
 /* The rule beside the list doubles as the progress bar */
 .post-tree nav {
     position: relative;
+    max-width: 318px;
     padding-inline-start: 14px;
 }
 
@@ -171,12 +214,12 @@
 }
 
 .post-tree li li {
-    padding-inline-start: 12px;
+    padding-inline-start: 18px;
 }
 
 .post-tree nav a {
     display: block;
-    padding: 3px 0;
+    padding: 2px 0;
     color: var(--secondary);
 }
 
