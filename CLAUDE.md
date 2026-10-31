@@ -20,10 +20,9 @@ hugo --gc --minify -d "$TMPDIR/hugo-out" # production-style build check (don't b
 hugo list drafts                         # what's still unpublished
 ```
 
-- CI pins Hugo **extended 0.166.0** (`HUGO_VERSION` in the workflow). Keep the local version in sync; bump both together. PaperMod needs ≥ 0.146.
+- CI pins Hugo **extended 0.169.0** (`HUGO_VERSION` in the workflow). Keep the local version in sync; bump both together. PaperMod needs ≥ 0.158.
 - On this Windows machine Hugo is installed via winget. If `hugo` isn't on PATH in a shell, use `C:\Users\rst\AppData\Local\Microsoft\WinGet\Packages\Hugo.Hugo.Extended_Microsoft.Winget.Source_8wekyb3d8bbwe\hugo.exe`.
 - After cloning: `git submodule update --init --recursive` (theme lives in `themes/PaperMod`).
-- Two `.Language.*` deprecation warnings come from the theme; ignore them unless the build fails.
 
 ## Layout
 
