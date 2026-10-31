@@ -33,6 +33,8 @@ content/posts/<date>-<slug>/    one page bundle per post: index.md + images/data
 content/{archives,search}.md         fixed pages — don't delete; archives/search use theme layouts
 archetypes/posts/index.md       post scaffold (YAML front matter)
 layouts/partials/extend_head.html    loads KaTeX only on posts with `math: true`
+layouts/posts/single.html       post page: theme layout plus the header (icon slot, subtitle, facts) and left-hand contents
+layouts/partials/post_tree.html, assets/js/post-tree.js, assets/css/extended/post.css    post header and contents
 .claude/skills/                 new-post, publish-post workflows
 ```
 
@@ -47,7 +49,8 @@ Don't edit `themes/PaperMod` (submodule). Override via files in `layouts/` or `a
   date: 2026-09-20
   draft: true
   tags: ["llm", "inference"]            # 1–4, lowercase, reuse existing tags (grep content/posts)
-  summary: "One or two sentences shown in listings and link previews."
+  summary: "One or two sentences shown in listings."
+  description: "Two or three sentences under the title: what was tested and why. Also used for RSS and link previews."
   math: true                            # only if the post has LaTeX
   ```
 - Optional: `cover: {image: cover.png, alt: "..."}`, `ShowToc: false` for short posts.
@@ -89,7 +92,7 @@ The reader is a technically competent peer: an engineer or technical lead who kn
 ### Structure
 - Open with the question or motivation in one or two paragraphs, not a thesis statement or a hook. Say what I wanted to find out and why it seemed worth testing.
 - Then: method (what was done, and what was deliberately not done), results, interpretation, limitations, and a short closing thought.
-- Use headings sparingly (a short post may need only three or four). Plain, descriptive headings, not clever ones.
+- Use headings sparingly (a short post may need only three or four). Plain, descriptive headings, not clever ones. H3s appear in the left-hand contents, opening as the reader reaches their H2, so add a few where a long section has distinct parts.
 - Use a table or figure when it conveys results more clearly than prose, and say in the text what the reader should notice in it. Do not use bullet lists as a substitute for reasoning; use them for genuinely parallel items (configurations, caveats, steps).
 - Use bold rarely, mainly for a key term at first definition. No emoji. No decorative formatting.
 

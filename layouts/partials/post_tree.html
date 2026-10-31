@@ -1,0 +1,10 @@
+{{- /* Left-hand contents for wide screens. toc.html stays as the fallback on narrow ones.
+  Both render .TableOfContents, so the id is swapped here to keep it unique on the page. */ -}}
+{{- if .Fragments.HeadingsMap }}
+<aside class="post-tree" aria-label="Contents">
+  <a class="post-tree-title" href="#top">{{ .Title }}</a>
+  {{ replace .TableOfContents `<nav id="TableOfContents">` `<nav>` | safeHTML }}
+</aside>
+{{- $js := resources.Get "js/post-tree.js" | minify | fingerprint }}
+<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+{{- end }}

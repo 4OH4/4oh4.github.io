@@ -1,0 +1,204 @@
+/* Softer body text and lighter headings for long reads. Dark mode keeps the theme's colour,
+   which its own selector applies over this one. */
+
+:root {
+    --content: rgb(60, 60, 60);
+}
+
+.md-content h2,
+.md-content h3 {
+    font-weight: 600;
+}
+
+.md-content h2 {
+    font-size: 26px;
+}
+
+.md-content h3 {
+    font-size: 20px;
+}
+
+/* Post header */
+
+/* The outset carries the bottom border to the window edges without adding scrollable width */
+.post-single .post-header {
+    margin: 32px auto 48px;
+    padding-bottom: 48px;
+    border-image: linear-gradient(var(--tertiary), var(--tertiary)) 1 / 0 0 1px / 0 100vw;
+}
+
+/* Holds the space for a post icon */
+.post-icon {
+    width: 72px;
+    height: 72px;
+    margin-bottom: 24px;
+}
+
+.post-single .post-title {
+    line-height: 1.2;
+}
+
+.post-single .post-description {
+    margin-top: 20px;
+    color: var(--secondary);
+    font-size: 19px;
+    line-height: 1.55;
+}
+
+.post-facts {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px var(--gap);
+    margin-top: 32px;
+    font-size: 15px;
+}
+
+.post-facts dt {
+    color: var(--secondary);
+    font-size: 13px;
+}
+
+.post-facts dd {
+    margin: 2px 0 0;
+    color: var(--primary);
+}
+
+.post-facts a {
+    text-decoration: underline;
+    text-decoration-color: var(--tertiary);
+    text-underline-offset: 0.2em;
+}
+
+@media (max-width: 560px) {
+    .post-single .post-title {
+        font-size: 32px;
+    }
+
+    .post-facts {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/* Left-hand contents. The tree and article form one block, centred while there is room.
+   As the page narrows the block's left edge holds at 96px while the right margin shrinks
+   to 24px, then the left edge tightens to 28px. The 100% resolves against the page width
+   wherever --tree-left is used, and 1120px allows for a classic scrollbar. */
+
+:root {
+    --tree-width: 280px;
+    --tree-gutter: 48px;
+    --tree-block: calc(var(--tree-width) + var(--tree-gutter) + var(--main-width));
+    --tree-left: max(28px, min(96px, 100% - var(--tree-block) - 24px), (100% - var(--tree-block)) / 2);
+}
+
+.post-body .post-content {
+    margin-top: 0;
+}
+
+.post-tree {
+    display: none;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+@media screen and (min-width: 1120px) {
+    /* The grid reaches left out of .main, so the tree sits beside the article and sticks
+       only while the article is on screen */
+    .post-body:has(.post-tree) {
+        display: grid;
+        grid-template-columns: var(--tree-width) minmax(0, 1fr);
+        column-gap: var(--tree-gutter);
+        margin-inline-start: calc(-1 * (var(--tree-width) + var(--tree-gutter)));
+    }
+
+    .post-tree {
+        display: block;
+        position: sticky;
+        top: 32px;
+        align-self: start;
+        max-height: calc(100vh - 64px);
+        overflow-y: auto;
+    }
+
+    details.toc {
+        display: none;
+    }
+
+    .main:has(.post-tree) {
+        margin-left: calc(var(--tree-left) + var(--tree-width) + var(--tree-gutter) - var(--gap));
+    }
+
+    /* Logo lines up with the tree, menu with the article's right edge */
+    body:has(.post-tree) .header-nav {
+        max-width: calc(var(--tree-block) + var(--gap) * 2);
+        margin-left: calc(var(--tree-left) - var(--gap));
+    }
+}
+
+.post-tree-title {
+    display: block;
+    margin-bottom: 16px;
+    color: var(--primary);
+    font-weight: 500;
+}
+
+/* The rule beside the list doubles as the progress bar */
+.post-tree nav {
+    position: relative;
+    padding-inline-start: 14px;
+}
+
+.post-tree nav::before,
+.post-tree nav::after {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 0;
+    width: 2px;
+    background: var(--tertiary);
+}
+
+.post-tree nav::after {
+    background: var(--primary);
+    transform: scaleY(var(--tree-progress, 0));
+    transform-origin: top;
+}
+
+.post-tree ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.post-tree li li {
+    padding-inline-start: 12px;
+}
+
+.post-tree nav a {
+    display: block;
+    padding: 3px 0;
+    color: var(--secondary);
+}
+
+.post-tree nav a:hover,
+.post-tree .is-open > a {
+    color: var(--primary);
+}
+
+.post-tree nav a[aria-current] {
+    font-weight: 500;
+}
+
+/* Without the script every subsection stays visible */
+.js .post-tree li ul {
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    interpolate-size: allow-keywords;
+    transition: height 200ms ease, visibility 200ms;
+}
+
+.js .post-tree li.is-open > ul {
+    height: auto;
+    visibility: visible;
+}

@@ -4,6 +4,7 @@ date: 2026-10-31
 draft: false
 tags: ["llm", "evals", "benchmarks"]
 summary: "I compared Jev, a non-generative classification model from TypeSafe AI, with Claude Haiku 4.5, GPT-5.4 mini and Gemini 3.8 Flash on Banking77, AG News and IMDb. It matched or beat Haiku and GPT-5.4 mini on accuracy at a fraction of the cost and trailed Gemini on two of the three datasets, but its confidence was no better calibrated than the LLMs' verbalised confidence."
+description: "Jev is a non-generative language model that TypeSafe AI describes as calibrated. I compared it with Claude Haiku 4.5, GPT-5.4 mini and Gemini 3.8 Flash on three public text classification datasets. I wanted to see how a classification-only model holds up against the cheap end of general-purpose LLMs, and whether its confidence is reliable enough to act on."
 ---
 
 **TL;DR.** Across 1,000 samples from each of three public text classification datasets, Jev matched or beat Claude Haiku 4.5 and GPT-5.4 mini on balanced accuracy, and trailed Gemini 3.8 Flash by 2 to 4 points on AG News and zero-shot Banking77. At list price, it costs between ~2 and ~15 times less per row than the cheapest LLM. Despite being trained using Reinforcement Learning for Calibrated Decisions, its confidence values were not better calibrated than the LLMs' self-reported confidence: Jev's expected calibration error (ECE) ranked third of four on every dataset. Accuracy did rise with Jev's confidence, so a confidence threshold was still useful. A TF-IDF + linear SVM trained on the full training splits had the highest balanced accuracy on Banking77 and AG News, but was about 6 points behind every API model on IMDb.
@@ -23,6 +24,8 @@ I wanted to answer two questions:
 
 ## Method
 
+### Models
+
 I ran Jev against the small, fast model from each of three providers, chosen so that the comparison is between models of similar price and speed:
 
 - Jev: `typesafe-ai/jev` through the Vercel AI Gateway. The gateway exposes no version string, so this means the model as served on 20 and 21 September 2026, within a week of its 15 September release.
@@ -31,6 +34,8 @@ I ran Jev against the small, fast model from each of three providers, chosen so 
 - Gemini 3.8 Flash: `gemini-3.8-flash`, temperature 0, thinking budget 0.
 
 As a reference point I also trained a TF-IDF + linear SVM (words and word pairs as features) on each full training split, with `C` chosen by 5-fold cross-validation.
+
+### Datasets
 
 The datasets were:
 
@@ -71,7 +76,11 @@ Jev was third of four on ECE on every dataset. On IMDb all four were close to ca
 
 ![Reliability diagram for Banking77, zero-shot: accuracy against mean stated confidence per bucket for the four models, with a perfect-calibration diagonal and row counts per bucket underneath. All four lines sit below the diagonal, except GPT-5.4 mini's lowest bucket.](reliability-banking77.png)
 
+### Brier score
+
 The Brier score tells a slightly different story. Jev had the lowest on Banking77, although Gemini's was within 0.002 and the difference included zero. ECE only measures whether confidence matches accuracy within each bucket. The Brier score also rewards confidence that separates right answers from wrong ones. Jev's Brier score was lower than Haiku's and GPT-5.4 mini's on both Banking77 and AG News, with intervals that excluded zero, despite a worse ECE than Haiku on both. This suggests Jev's confidence separated right from wrong answers better than those two models' did, although I didn't measure that directly.
+
+### Confidence thresholds
 
 The weaker reading of TypeSafe's claim, that higher confidence means higher accuracy, held for Jev in one sense: keeping only answers at or above a confidence threshold raised accuracy as the threshold rose. On Banking77 it went from 0.799 with no threshold to 0.935 at 0.95, keeping 70% of rows. On IMDb the rise was smaller (0.955 to 0.977) and flat between thresholds of 0.45 and 0.6. The same was true of all three LLMs, so this does not set Jev apart. Individual low-confidence buckets, with 3 to 73 rows each, were too noisy to say more. The stricter reading, that a stated 0.9 means right nine times in ten, did not hold any better for Jev than for the LLMs.
 
